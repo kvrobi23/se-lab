@@ -8,6 +8,7 @@ import java.util.Random;
 * (Deliberately contains bugs.)
 */
 public class TorpedoStore {
+  //Saved the random number generator here, so it's not reinitialised each time.
   Random generator = new Random();
 
   // rate of failing to fire torpedos [0.0, 1.0]
@@ -31,6 +32,7 @@ public class TorpedoStore {
 
   public boolean fire(int numberOfTorpedos){
     if(numberOfTorpedos < 1 || numberOfTorpedos > this.torpedoCount){
+      //throw an Exception, if numberOfTorpedos is less than one, or more than torpedoCount.
       throw new IllegalArgumentException("numberOfTorpedos");
     }
 
@@ -41,6 +43,7 @@ public class TorpedoStore {
     double r = generator.nextDouble();
 
     if (r >= FAILURE_RATE) {
+      //fixed =- to -=
       // successful firing
       this.torpedoCount -= numberOfTorpedos;
       success = true;
